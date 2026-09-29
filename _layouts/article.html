@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="{{ page.summary | default: site.description | strip_html | escape }}">
+    <title>{{ page.title }} | {{ site.title }}</title>
+    <link rel="stylesheet" href="{{ '/css/style.css' | relative_url }}">
+    <script src="{{ '/script/main.js' | relative_url }}" defer></script>
+  </head>
+  <body data-home-url="{{ '/' | relative_url }}" data-article-page>
+    {% include site-header.html %}
+
+    <main class="page-shell">
+      {% include sidebar.html %}
+
+      <div class="content-column">
+        <section class="glass-card articles-panel article-document-panel">
+          <article class="article-document" data-article-document>
+            <a class="back-link" href="{{ '/' | relative_url }}" data-return-to-list>← Back to articles</a>
+            <header class="article-document-header">
+              <h1 tabindex="-1">{{ page.title }}</h1>
+              <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%m/%d/%Y" }}</time>
+              {% if page.summary %}<p>{{ page.summary }}</p>{% endif %}
+            </header>
+            <div class="article-content">
+              {{ content }}
+            </div>
+          </article>
+        </section>
+      </div>
+    </main>
+
+    {% include site-footer.html %}
+  </body>
+</html>

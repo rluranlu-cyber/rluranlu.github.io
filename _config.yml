@@ -1,0 +1,22 @@
+title: Ran Lu
+description: Personal blog of Ran Lu, 3D Animation Director and AIGC Explorer.
+url: "https://rluranlu-cyber.github.io"
+baseurl: "/rluranlu.github.io"
+timezone: Asia/Shanghai
+lang: en
+markdown: kramdown
+permalink: pretty
+
+defaults:
+  - scope:
+      path: "article"
+      type: pages
+    values:
+      layout: article
+      article: true
+
+exclude:
+  - doc
+  - README.md
+  - article/_template
+  - css/Inika-OFL.txt

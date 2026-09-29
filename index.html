@@ -1,116 +1,54 @@
-<!DOCTYPE html>
-<html lang="zh-CN">
+---
+title: Ran Lu
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Ran Lu — 3D Animation Director and AIGC Explorer.">
+    <title>{{ page.title }} | {{ site.title }}</title>
+    <link rel="stylesheet" href="{{ '/css/style.css' | relative_url }}">
+    <script src="{{ '/script/main.js' | relative_url }}" defer></script>
+  </head>
+  <body data-home-url="{{ '/' | relative_url }}">
+    {% include site-header.html %}
 
-<head>
-    <meta charset="UTF-8">
+    <main class="page-shell">
+      {% include sidebar.html %}
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <div class="content-column">
+        {% assign articles = site.pages | where: "article", true | sort: "date" | reverse %}
+        <section class="glass-card articles-panel" data-article-list-panel aria-label="Articles">
+          {% if articles.size > 0 %}
+            <div class="article-list" data-article-list data-page-size="6">
+              {% for article in articles %}
+                <article class="article-list-item" data-article-item>
+                  <header class="article-list-header">
+                    <h2 class="article-list-title">
+                      <a href="{{ article.url | relative_url }}" data-article-link>{{ article.title }}</a>
+                    </h2>
+                    <time datetime="{{ article.date | date_to_xmlschema }}">{{ article.date | date: "%m/%d/%Y" }}</time>
+                  </header>
+                  <p class="article-list-summary">
+                    {{ article.summary | default: article.excerpt | strip_html | strip_newlines | truncate: 180 }}
+                  </p>
+                  <img class="article-divider" src="{{ '/image/article-divider.svg' | relative_url }}" width="650.333" height="5.33333" alt="" aria-hidden="true">
+                </article>
+              {% endfor %}
+            </div>
+          {% else %}
+            <div class="article-empty-state">
+              <p>New articles are on the way.</p>
+            </div>
+          {% endif %}
+        </section>
 
-    <title>Ran Lu</title>
+        <div class="article-detail-view" data-article-detail hidden aria-live="polite"></div>
+        <nav class="pagination" data-pagination aria-label="Article pages" hidden></nav>
+      </div>
+    </main>
 
-    <style>
-        body {
-            margin: 0;
-            font-family: 'Times New Roman', Times, serif, "Microsoft YaHei", sans-serif;
-            background-color: #272f36;
-            color: #ffffff;
-        }
-
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 100px 30px;
-        }
-
-        h1 {
-            font-size: 48px;
-            margin-bottom: 10px;
-        }
-
-        .subtitle {
-            font-size: 20px;
-            color: #cfcfcf;
-            margin-bottom: 40px;
-        }
-
-        .about {
-            font-size: 18px;
-            line-height: 1.8;
-        }
-
-        .subtitle {
-            font-size: 30px;
-            color: #cfcfcf;
-            margin-bottom: 40px;
-        }
-
-        .links {
-            margin-top: 40px;
-        }
-
-        .links a {
-            margin-right: 20px;
-            color: #3676ff;
-            text-decoration: none;
-            border-bottom: 1px solid #3676ff;
-        }
-
-        .links a:hover {
-            color: #777;
-        }
-
-        footer {
-            margin-top: 100px;
-            font-size: 14px;
-            color: #999;
-        }
-    </style>
-</head>
-
-<body>
-
-    <div class="container">
-
-        <h1>Hello, this is Ran Lu🧸</h1>
-
-        <div class="subtitle">
-            3D Artist / Animation Director🎬
-        </div>
-
-        <div class="about">
-            <p>
-                Welcome to my personal website.
-            </p>
-
-            <p>
-                I specialize in 3D animation and visual content creation,
-                with a passion for storytelling, film, and animation.
-            </p>
-
-            <p>
-                This is where I will gradually organize my portfolio, projects, and personal creations.
-            </p>
-
-            <P>
-                Thank you for visiting, I hope you enjoy my works here!
-            </P>
-        </div>
-
-        <div class="subtitle">
-            (👉ﾟヮﾟ)👉 Amor Fati 👈(ﾟヮﾟ👈)
-        </div>
-
-        <div class="links">
-            <a href="https://github.com/" target="_blank">GitHub</a>
-            <a href="mailto:rluranlu@gmail.com">Email</a>
-        </div>
-
-        <footer>
-            © 2026 Ran Lu | All rights reserved.
-        </footer>
-
-    </div>
-
-</body>
-
+    {% include site-footer.html %}
+  </body>
 </html>
