@@ -31,14 +31,14 @@
 html {
   min-width: 1120px;
   min-height: 100%;
-  background: #526153;
+  background: #32333b;
 }
 
 body {
   min-height: 100vh;
   margin: 0;
   color: var(--white);
-  background: linear-gradient(180deg, #526153 12.981%, #a2ba9f 93.269%);
+  background: linear-gradient(180deg, #32333b 12.981%, #32333b 93.269%);
   font-family: "Inika", Georgia, serif;
   font-weight: 400;
 }
