@@ -165,6 +165,14 @@ button:focus-visible {
   display: block;
   width: 160px;
   height: 160px;
+  border: 1px solid rgba(211, 158, 61, 0.7);
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: center;
+  box-shadow:
+    0 0 8px rgba(211, 96, 61, 0.7),
+    0 0 22px rgba(211, 158, 61, 0.45),
+    0 0 42px rgba(211, 96, 61, 0.22);
 }
 
 .profile-card h3,
