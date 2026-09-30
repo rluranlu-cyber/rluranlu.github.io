@@ -1,0 +1,4 @@
+<nav class="view-tabs" aria-label="Blog views">
+  <button class="view-tab{% if include.active == 'blog' %} is-active{% endif %}" type="button" data-view-tab="blog"{% if include.active == 'blog' %} aria-current="page"{% endif %}>Blog</button>
+  <button class="view-tab{% if include.active == 'archive' %} is-active{% endif %}" type="button" data-view-tab="archive"{% if include.active == 'archive' %} aria-current="page"{% endif %}>Archive</button>
+</nav>

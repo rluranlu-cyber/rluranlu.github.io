@@ -11,15 +11,16 @@ title: Ran Lu
     <link rel="stylesheet" href="{{ '/css/style.css' | relative_url }}">
     <script src="{{ '/script/main.js' | relative_url }}" defer></script>
   </head>
-  <body data-home-url="{{ '/' | relative_url }}">
+  <body data-home-url="{{ '/' | relative_url }}" data-page-kind="home">
     {% include site-header.html %}
 
     <main class="page-shell">
       {% include sidebar.html %}
 
       <div class="content-column">
+        {% include view-tabs.html active="blog" %}
         {% assign articles = site.pages | where: "article", true | sort: "date" | reverse %}
-        <section class="glass-card articles-panel" data-article-list-panel aria-label="Articles">
+        <section class="glass-card content-panel articles-panel" data-blog-panel aria-label="Articles">
           {% if articles.size > 0 %}
             <div class="article-list" data-article-list data-page-size="6">
               {% for article in articles %}
@@ -42,10 +43,23 @@ title: Ran Lu
               <p>New articles are on the way.</p>
             </div>
           {% endif %}
+          <nav class="pagination" data-blog-pagination aria-label="Article pages" hidden></nav>
+        </section>
+
+        <section class="glass-card content-panel archive-panel" data-archive-panel aria-label="Article archive" hidden>
+          <div class="archive-source" data-archive-source hidden>
+            {% for article in articles %}
+              {% for tag in article.tags %}
+                <a href="{{ article.url | relative_url }}" data-archive-entry data-tag="{{ tag | escape }}" data-article-link>{{ article.title }}</a>
+              {% endfor %}
+            {% endfor %}
+          </div>
+          <div class="archive-list" data-archive-list data-page-size="6"></div>
+          <p class="archive-empty-state" data-archive-empty hidden>No tagged articles yet.</p>
+          <nav class="pagination" data-archive-pagination aria-label="Archive pages" hidden></nav>
         </section>
 
         <div class="article-detail-view" data-article-detail hidden aria-live="polite"></div>
-        <nav class="pagination" data-pagination aria-label="Article pages" hidden></nav>
       </div>
     </main>
 

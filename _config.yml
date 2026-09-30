@@ -20,3 +20,5 @@ exclude:
   - README.md
   - article/_template
   - css/Inika-OFL.txt
+  - css/Stick-OFL.txt
+  - css/Roboto-OFL.txt
