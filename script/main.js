@@ -4,6 +4,153 @@
   const homeUrl = new URL(document.body.dataset.homeUrl || "/", window.location.origin);
   const pageKind = document.body.dataset.pageKind || "home";
   const tabs = Array.from(document.querySelectorAll("[data-view-tab]"));
+  const languageToggle = document.querySelector("[data-language-toggle]");
+  const mobileLayoutQuery = window.matchMedia("(max-width: 767px)");
+  const translations = {
+    en: {
+      greeting: "Hello, this is",
+      siteName: "RAN LU",
+      tagline: "Amor Fati",
+      aboutPrimary: "About",
+      aboutSecondary: "Me",
+      blog: "Blog",
+      archive: "Archive",
+      profileName: "Ran Lu",
+      role: "3D Animation Director / AIGC Explorer",
+      valuesPrimary: "Humanist",
+      valuesSecondary: "idealist",
+      locationPrimary: "📍Beijing",
+      locationRest: " / Shenzhen / Kunming / Florida",
+      love: "Love",
+      loveAnimation: "Animation, anime, manga, films...",
+      loveBicycling: "Bicycling 🚲",
+      loveFood: "Mcdonal’s, Cantonese food 🥗",
+      loveTraveling: "Traveling 🚊",
+      loveDoggies: "Doggies 🐶",
+      loveArt: "Art & philosophy 🎨",
+      specialize: "Specialize in",
+      skillMaya: "Autodesk Maya (Full workflow)",
+      skillBlender: "Blender (Animation)",
+      skillUnreal: "Unreal Engine (Cinematic Animation)",
+      skillPremiere: "Adobe Premiere (Editing)",
+      skillResolve: "Davinci Resolve (Color Grading)",
+      contactPrimary: "Contact",
+      contactSecondary: "Me",
+      back: "← Back",
+      blogEmpty: "New articles are on the way.",
+      archiveEmpty: "No tagged articles yet.",
+      loading: "Loading article…",
+      articleError: "The article could not be loaded here.",
+      openArticle: "Open the article page",
+      goToPage: "Go to page",
+      viewNavigation: "Blog views",
+      aboutAria: "About Ran Lu",
+      aboutSectionAria: "About Me",
+      portraitAlt: "Portrait of Ran Lu",
+      contactAria: "Contact",
+      articlesAria: "Articles",
+      articlePagesAria: "Article pages",
+      archiveAria: "Article archive",
+      archivePagesAria: "Archive pages",
+      toggleAria: "切换为中文"
+    },
+    zh: {
+      greeting: "大家好，这里是",
+      siteName: "细雨",
+      tagline: "爱与正义与勇气",
+      aboutPrimary: "关于",
+      aboutSecondary: "我",
+      blog: "博客",
+      archive: "合辑",
+      profileName: "细雨",
+      role: "3D 动画导演 / AIGC 探索者",
+      valuesPrimary: "人文主义者",
+      valuesSecondary: "理想主义者",
+      locationPrimary: "📍北京",
+      locationRest: " / 深圳 / 昆明 / 佛罗里达",
+      love: "喜欢",
+      loveAnimation: "动画, 二次元, 漫画, 电影...",
+      loveBicycling: "骑行 🚲",
+      loveFood: "麦当劳, 粤菜 🥗",
+      loveTraveling: "旅行 🚊",
+      loveDoggies: "小狗狗 🐶",
+      loveArt: "艺术 & 哲学 🎨",
+      specialize: "专注于",
+      skillMaya: "Autodesk Maya (全流程)",
+      skillBlender: "Blender (动画)",
+      skillUnreal: "Unreal Engine (过场动画)",
+      skillPremiere: "Adobe Premiere (剪辑)",
+      skillResolve: "Davinci Resolve (调色)",
+      contactPrimary: "联络",
+      contactSecondary: "我",
+      back: "← 返回",
+      blogEmpty: "新文章正在准备中。",
+      archiveEmpty: "暂时没有已归档的文章。",
+      loading: "正在加载文章…",
+      articleError: "无法在当前页面加载这篇文章。",
+      openArticle: "打开文章页面",
+      goToPage: "前往第",
+      viewNavigation: "博客视图",
+      aboutAria: "关于细雨",
+      aboutSectionAria: "关于我",
+      portraitAlt: "细雨的头像",
+      contactAria: "联系方式",
+      articlesAria: "文章",
+      articlePagesAria: "文章分页",
+      archiveAria: "文章合辑",
+      archivePagesAria: "合辑分页",
+      toggleAria: "Switch to English"
+    }
+  };
+
+  function storedLanguage() {
+    try {
+      return window.localStorage.getItem("site-language") === "zh" ? "zh" : "en";
+    } catch (_error) {
+      return "en";
+    }
+  }
+
+  let currentLanguage = storedLanguage();
+
+  function translatedText(key) {
+    if (key === "contactPrimary" && currentLanguage === "zh" && mobileLayoutQuery.matches) {
+      return "联系";
+    }
+    if (key === "loveDoggies" && currentLanguage === "zh" && mobileLayoutQuery.matches) {
+      return "小狗狗🐶";
+    }
+    return translations[currentLanguage][key] ?? translations.en[key] ?? "";
+  }
+
+  function applyLanguage(root = document) {
+    document.documentElement.lang = currentLanguage === "zh" ? "zh-CN" : "en";
+    document.body.dataset.language = currentLanguage;
+
+    root.querySelectorAll("[data-i18n]").forEach((element) => {
+      element.textContent = translatedText(element.dataset.i18n);
+    });
+    root.querySelectorAll("[data-i18n-aria-label]").forEach((element) => {
+      element.setAttribute("aria-label", translatedText(element.dataset.i18nAriaLabel));
+    });
+    root.querySelectorAll("[data-i18n-alt]").forEach((element) => {
+      element.setAttribute("alt", translatedText(element.dataset.i18nAlt));
+    });
+    languageToggle?.setAttribute("aria-label", translatedText("toggleAria"));
+  }
+
+  languageToggle?.addEventListener("click", () => {
+    currentLanguage = currentLanguage === "en" ? "zh" : "en";
+    try {
+      window.localStorage.setItem("site-language", currentLanguage);
+    } catch (_error) {
+      // The in-page switch still works when persistent storage is unavailable.
+    }
+    applyLanguage();
+  });
+
+  mobileLayoutQuery.addEventListener?.("change", () => applyLanguage());
+  applyLanguage();
 
   function homeViewUrl(view, page = 1) {
     const url = new URL(homeUrl.href);
@@ -121,7 +268,9 @@
       const button = document.createElement("button");
       button.type = "button";
       button.textContent = String(page);
-      button.setAttribute("aria-label", `Go to page ${page}`);
+      button.setAttribute("aria-label", currentLanguage === "zh"
+        ? `${translatedText("goToPage")} ${page} 页`
+        : `${translatedText("goToPage")} ${page}`);
       if (page === activePage) {
         button.setAttribute("aria-current", "page");
       }
@@ -312,7 +461,8 @@
     detailView.hidden = false;
     document.body.dataset.currentView = "article";
     setActiveTab("blog");
-    detailView.innerHTML = '<section class="glass-card content-panel article-document-panel"><p class="article-loading">Loading article…</p></section>';
+    detailView.innerHTML = '<section class="glass-card content-panel article-document-panel"><p class="article-loading" data-i18n="loading">Loading article…</p></section>';
+    applyLanguage(detailView);
 
     try {
       const response = await fetch(url, { headers: { Accept: "text/html" } });
@@ -333,6 +483,7 @@
       panel.append(article);
       detailView.replaceChildren(panel);
       bindReturnLink(detailView);
+      applyLanguage(detailView);
       document.title = articleDocument.title || listDocumentTitle;
 
       if (pushHistory) {
@@ -349,8 +500,9 @@
       const fallbackUrl = new URL(url, window.location.href).href;
       detailView.innerHTML = `
         <section class="glass-card content-panel article-document-panel">
-          <p class="article-error">The article could not be loaded here. <a href="${fallbackUrl}">Open the article page</a>.</p>
+          <p class="article-error"><span data-i18n="articleError">The article could not be loaded here.</span> <a href="${fallbackUrl}" data-i18n="openArticle">Open the article page</a>.</p>
         </section>`;
+      applyLanguage(detailView);
       console.error(error);
     }
   }
