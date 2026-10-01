@@ -7,7 +7,9 @@
 
   function homeViewUrl(view, page = 1) {
     const url = new URL(homeUrl.href);
-    if (view === "archive") {
+    if (view === "about") {
+      url.searchParams.set("view", "about");
+    } else if (view === "archive") {
       url.searchParams.set("view", "archive");
       if (page > 1) {
         url.searchParams.set("archivePage", String(page));
@@ -19,7 +21,7 @@
   }
 
   function setActiveTab(view) {
-    const activeView = view === "archive" ? "archive" : "blog";
+    const activeView = view === "about" || view === "archive" ? view : "blog";
     tabs.forEach((tab) => {
       const active = tab.dataset.viewTab === activeView;
       tab.classList.toggle("is-active", active);
@@ -32,9 +34,10 @@
   }
 
   if (pageKind === "article") {
+    document.body.dataset.currentView = "article";
     tabs.forEach((tab) => {
       tab.addEventListener("click", () => {
-        const view = tab.dataset.viewTab === "archive" ? "archive" : "blog";
+        const view = tab.dataset.viewTab === "about" || tab.dataset.viewTab === "archive" ? tab.dataset.viewTab : "blog";
         window.location.assign(homeViewUrl(view));
       });
     });
@@ -51,6 +54,7 @@
   const archivePagination = document.querySelector("[data-archive-pagination]");
   const detailView = document.querySelector("[data-article-detail]");
   const contentColumn = document.querySelector(".content-column");
+  const isMobileLayout = window.matchMedia("(max-width: 767px)").matches;
 
   if (!blogPanel || !blogPagination || !archivePanel || !archiveList || !archivePagination || !detailView || !contentColumn) {
     return;
@@ -59,10 +63,20 @@
   const articleItems = articleList ? Array.from(articleList.querySelectorAll("[data-article-item]")) : [];
   const blogPageSize = Number.parseInt(articleList?.dataset.pageSize || "6", 10);
   const blogPageCount = Math.max(1, Math.ceil(articleItems.length / blogPageSize));
-  const archivePageSize = Number.parseInt(archiveList.dataset.pageSize || "6", 10);
+  const archivePageSize = Number.parseInt(
+    isMobileLayout
+      ? archiveList.dataset.mobilePageSize || "4"
+      : archiveList.dataset.pageSize || "6",
+    10
+  );
   const listDocumentTitle = document.title;
   const initialUrl = new URL(window.location.href);
-  let currentView = initialUrl.searchParams.get("view") === "archive" ? "archive" : "blog";
+  const requestedView = initialUrl.searchParams.get("view");
+  let currentView = requestedView === "about" || requestedView === "blog" || requestedView === "archive"
+    ? requestedView
+    : isMobileLayout
+      ? "about"
+      : "blog";
   let blogPage = clampPage(readPage(initialUrl, "page"), blogPageCount);
   let archivePage = Math.max(1, readPage(initialUrl, "archivePage"));
   let articleReturnView = currentView;
@@ -151,7 +165,12 @@
       if (!groupsByTag.has(tag)) {
         groupsByTag.set(tag, []);
       }
-      groupsByTag.get(tag).push({ title: entry.textContent.trim(), href: entry.href });
+      groupsByTag.get(tag).push({
+        title: entry.textContent.trim(),
+        href: entry.href,
+        date: entry.dataset.date || "",
+        dateIso: entry.dataset.dateIso || ""
+      });
     });
 
     archiveList.replaceChildren();
@@ -160,18 +179,44 @@
       group.className = "archive-group";
       group.dataset.archiveGroup = "";
 
-      const heading = document.createElement("h2");
+      const heading = document.createElement(isMobileLayout ? "button" : "h2");
       heading.className = "archive-tag";
       heading.textContent = tag;
+      if (isMobileLayout) {
+        heading.type = "button";
+        heading.setAttribute("aria-expanded", "false");
+      }
 
       const titles = document.createElement("div");
       titles.className = "archive-titles";
+      if (isMobileLayout) {
+        const titlesId = `archive-tag-${groupsByTag.size}-${archiveList.childElementCount + 1}`;
+        titles.id = titlesId;
+        titles.hidden = true;
+        heading.setAttribute("aria-controls", titlesId);
+        heading.addEventListener("click", () => {
+          const expanded = heading.getAttribute("aria-expanded") === "true";
+          heading.setAttribute("aria-expanded", String(!expanded));
+          titles.hidden = expanded;
+        });
+      }
       articles.forEach((article) => {
+        const archiveEntry = document.createElement("div");
+        archiveEntry.className = "archive-entry";
+
         const link = document.createElement("a");
         link.href = article.href;
         link.textContent = article.title;
         link.dataset.articleLink = "";
-        titles.append(link);
+
+        const time = document.createElement("time");
+        time.textContent = article.date;
+        if (article.dateIso) {
+          time.dateTime = article.dateIso;
+        }
+
+        archiveEntry.append(link, time);
+        titles.append(archiveEntry);
       });
 
       group.append(heading, titles);
@@ -209,7 +254,8 @@
   }
 
   function showView(view, pushHistory) {
-    currentView = view === "archive" ? "archive" : "blog";
+    currentView = view === "about" || view === "archive" ? view : "blog";
+    document.body.dataset.currentView = currentView;
     detailView.hidden = true;
     detailView.replaceChildren();
     blogPanel.hidden = currentView !== "blog";
@@ -264,6 +310,7 @@
     blogPanel.hidden = true;
     archivePanel.hidden = true;
     detailView.hidden = false;
+    document.body.dataset.currentView = "article";
     setActiveTab("blog");
     detailView.innerHTML = '<section class="glass-card content-panel article-document-panel"><p class="article-loading">Loading article…</p></section>';
 
@@ -310,7 +357,7 @@
 
   tabs.forEach((tab) => {
     tab.addEventListener("click", () => {
-      const view = tab.dataset.viewTab === "archive" ? "archive" : "blog";
+      const view = tab.dataset.viewTab === "about" || tab.dataset.viewTab === "archive" ? tab.dataset.viewTab : "blog";
       if (view === currentView && detailView.hidden) {
         return;
       }

@@ -50,11 +50,11 @@ title: Ran Lu
           <div class="archive-source" data-archive-source hidden>
             {% for article in articles %}
               {% for tag in article.tags %}
-                <a href="{{ article.url | relative_url }}" data-archive-entry data-tag="{{ tag | escape }}" data-article-link>{{ article.title }}</a>
+                <a href="{{ article.url | relative_url }}" data-archive-entry data-tag="{{ tag | escape }}" data-date="{{ article.date | date: '%m/%d/%Y' }}" data-date-iso="{{ article.date | date_to_xmlschema }}" data-article-link>{{ article.title }}</a>
               {% endfor %}
             {% endfor %}
           </div>
-          <div class="archive-list" data-archive-list data-page-size="6"></div>
+          <div class="archive-list" data-archive-list data-page-size="6" data-mobile-page-size="4"></div>
           <p class="archive-empty-state" data-archive-empty hidden>No tagged articles yet.</p>
           <nav class="pagination" data-archive-pagination aria-label="Archive pages" hidden></nav>
         </section>
