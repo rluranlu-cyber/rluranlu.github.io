@@ -754,10 +754,13 @@ body[data-language="zh"] .language-toggle [data-language-option="en"] {
   .view-tabs {
     position: relative;
     grid-area: tabs;
-    display: block;
+    display: flex;
     width: 100%;
     height: 95px;
-    padding: 0;
+    padding: 26px 16px 0;
+    align-items: flex-start;
+    justify-content: center;
+    gap: clamp(20px, 8vw, 36px);
   }
 
   .about-view-tab {
@@ -774,35 +777,9 @@ body[data-language="zh"] .language-toggle [data-language-option="en"] {
   }
 
   .view-tab {
-    position: absolute;
-    top: 26px;
     font-size: 24px;
     line-height: normal;
     white-space: nowrap;
-  }
-
-  .about-view-tab {
-    left: 49px;
-  }
-
-  .view-tab[data-view-tab="blog"] {
-    left: 195px;
-  }
-
-  .view-tab[data-view-tab="archive"] {
-    left: 285px;
-  }
-
-  body[data-language="zh"] .about-view-tab {
-    left: 48px;
-  }
-
-  body[data-language="zh"] .view-tab[data-view-tab="blog"] {
-    left: 196px;
-  }
-
-  body[data-language="zh"] .view-tab[data-view-tab="archive"] {
-    left: 320px;
   }
 
   .language-toggle {
