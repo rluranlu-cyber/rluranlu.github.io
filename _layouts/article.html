@@ -18,7 +18,7 @@
         {% include view-tabs.html active="blog" %}
         <section class="glass-card content-panel article-document-panel">
           <article class="article-document" data-article-document>
-            <a class="back-link" href="{{ '/' | relative_url }}" data-return-to-list>← Back to articles</a>
+            <a class="back-link" href="{{ '/' | relative_url }}" data-return-to-list data-i18n="back">← Back</a>
             <header class="article-document-header">
               <h1 tabindex="-1">{{ page.title }}</h1>
               <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%m/%d/%Y" }}</time>

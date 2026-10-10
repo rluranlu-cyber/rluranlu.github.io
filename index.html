@@ -20,7 +20,7 @@ title: Ran Lu
       <div class="content-column">
         {% include view-tabs.html active="blog" %}
         {% assign articles = site.pages | where: "article", true | sort: "date" | reverse %}
-        <section class="glass-card content-panel articles-panel" data-blog-panel aria-label="Articles">
+        <section class="glass-card content-panel articles-panel" data-blog-panel aria-label="Articles" data-i18n-aria-label="articlesAria">
           {% if articles.size > 0 %}
             <div class="article-list" data-article-list data-page-size="6">
               {% for article in articles %}
@@ -40,13 +40,13 @@ title: Ran Lu
             </div>
           {% else %}
             <div class="article-empty-state">
-              <p>New articles are on the way.</p>
+              <p data-i18n="blogEmpty">New articles are on the way.</p>
             </div>
           {% endif %}
-          <nav class="pagination" data-blog-pagination aria-label="Article pages" hidden></nav>
+          <nav class="pagination" data-blog-pagination aria-label="Article pages" data-i18n-aria-label="articlePagesAria" hidden></nav>
         </section>
 
-        <section class="glass-card content-panel archive-panel" data-archive-panel aria-label="Article archive" hidden>
+        <section class="glass-card content-panel archive-panel" data-archive-panel aria-label="Article archive" data-i18n-aria-label="archiveAria" hidden>
           <div class="archive-source" data-archive-source hidden>
             {% for article in articles %}
               {% for tag in article.tags %}
@@ -55,8 +55,8 @@ title: Ran Lu
             {% endfor %}
           </div>
           <div class="archive-list" data-archive-list data-page-size="6" data-mobile-page-size="4"></div>
-          <p class="archive-empty-state" data-archive-empty hidden>No tagged articles yet.</p>
-          <nav class="pagination" data-archive-pagination aria-label="Archive pages" hidden></nav>
+          <p class="archive-empty-state" data-archive-empty data-i18n="archiveEmpty" hidden>No tagged articles yet.</p>
+          <nav class="pagination" data-archive-pagination aria-label="Archive pages" data-i18n-aria-label="archivePagesAria" hidden></nav>
         </section>
 
         <div class="article-detail-view" data-article-detail hidden aria-live="polite"></div>

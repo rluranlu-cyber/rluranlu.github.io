@@ -1,5 +1,6 @@
-<nav class="view-tabs" aria-label="Blog views">
-  <button class="view-tab about-view-tab{% if include.active == 'about' %} is-active{% endif %}" type="button" data-view-tab="about"{% if include.active == 'about' %} aria-current="page"{% endif %}><span>About</span> Me</button>
-  <button class="view-tab{% if include.active == 'blog' %} is-active{% endif %}" type="button" data-view-tab="blog"{% if include.active == 'blog' %} aria-current="page"{% endif %}>Blog</button>
-  <button class="view-tab{% if include.active == 'archive' %} is-active{% endif %}" type="button" data-view-tab="archive"{% if include.active == 'archive' %} aria-current="page"{% endif %}>Archive</button>
+<nav class="view-tabs" aria-label="Blog views" data-i18n-aria-label="viewNavigation">
+  <button class="view-tab about-view-tab{% if include.active == 'about' %} is-active{% endif %}" type="button" data-view-tab="about"{% if include.active == 'about' %} aria-current="page"{% endif %}><span data-i18n="aboutPrimary">About</span> <span data-i18n="aboutSecondary">Me</span></button>
+  <button class="view-tab{% if include.active == 'blog' %} is-active{% endif %}" type="button" data-view-tab="blog" data-i18n="blog"{% if include.active == 'blog' %} aria-current="page"{% endif %}>Blog</button>
+  <button class="view-tab{% if include.active == 'archive' %} is-active{% endif %}" type="button" data-view-tab="archive" data-i18n="archive"{% if include.active == 'archive' %} aria-current="page"{% endif %}>Archive</button>
+  <button class="language-toggle" type="button" data-language-toggle aria-label="切换为中文"><span data-language-option="zh">Zh</span>/<span data-language-option="en">En</span></button>
 </nav>

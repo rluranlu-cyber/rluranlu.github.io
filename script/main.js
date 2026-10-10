@@ -10,7 +10,9 @@
     en: {
       greeting: "Hello, this is",
       siteName: "RAN LU",
-      tagline: "Amor Fati",
+      taglinePrefix: "^_+ ",
+      taglinePrimary: "Amor Fati",
+      taglineSuffix: " (:≡",
       aboutPrimary: "About",
       aboutSecondary: "Me",
       blog: "Blog",
@@ -57,7 +59,9 @@
     zh: {
       greeting: "大家好，这里是",
       siteName: "细雨",
-      tagline: "爱与正义与勇气",
+      taglinePrefix: "",
+      taglinePrimary: "爱与正义与勇气",
+      taglineSuffix: "",
       aboutPrimary: "关于",
       aboutSecondary: "我",
       blog: "博客",
@@ -135,6 +139,12 @@
     });
     root.querySelectorAll("[data-i18n-alt]").forEach((element) => {
       element.setAttribute("alt", translatedText(element.dataset.i18nAlt));
+    });
+    root.querySelectorAll("[data-page-number]").forEach((element) => {
+      const page = element.dataset.pageNumber;
+      element.setAttribute("aria-label", currentLanguage === "zh"
+        ? `${translatedText("goToPage")} ${page} 页`
+        : `${translatedText("goToPage")} ${page}`);
     });
     languageToggle?.setAttribute("aria-label", translatedText("toggleAria"));
   }
@@ -268,6 +278,7 @@
       const button = document.createElement("button");
       button.type = "button";
       button.textContent = String(page);
+      button.dataset.pageNumber = String(page);
       button.setAttribute("aria-label", currentLanguage === "zh"
         ? `${translatedText("goToPage")} ${page} 页`
         : `${translatedText("goToPage")} ${page}`);
