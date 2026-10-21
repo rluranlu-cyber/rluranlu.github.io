@@ -276,7 +276,7 @@ button:focus-visible {
 
 .profile-card h3 {
   position: absolute;
-  top: 191px;
+  top: 211px;
   left: 0;
   width: 100%;
   color: var(--orange);
@@ -813,13 +813,13 @@ body[data-language="zh"] .language-toggle [data-language-option="en"] {
   .view-tabs {
     position: relative;
     grid-area: tabs;
-    display: flex;
+    display: grid;
     width: 100%;
     height: 95px;
-    padding: 26px 16px 0;
+    padding: 26px 20px 0;
     align-items: flex-start;
-    justify-content: center;
-    gap: clamp(20px, 8vw, 36px);
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    justify-items: center;
   }
 
   .about-view-tab {
@@ -838,6 +838,7 @@ body[data-language="zh"] .language-toggle [data-language-option="en"] {
   .view-tab {
     font-size: 24px;
     line-height: normal;
+    text-align: center;
     white-space: nowrap;
   }
 
