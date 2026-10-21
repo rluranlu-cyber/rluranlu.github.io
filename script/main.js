@@ -59,9 +59,9 @@
     zh: {
       greeting: "大家好，这里是",
       siteName: "细雨",
-      taglinePrefix: "",
+      taglinePrefix: "^_+",
       taglinePrimary: "爱与正义与勇气",
-      taglineSuffix: "",
+      taglineSuffix: "(:≡",
       aboutPrimary: "关于",
       aboutSecondary: "我",
       blog: "博客",
