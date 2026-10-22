@@ -2,6 +2,8 @@
 title: Basic Filmmaking Notes 基础电影学知识
 date: 2026-09-30
 summary: 基础电影学知识介绍兼网站测试
+tags:
+  - Notes 知识
 ---
 ### Overview 概述
 
