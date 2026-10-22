@@ -485,6 +485,31 @@ body[data-language="zh"] .language-toggle [data-language-option="en"] {
   line-height: normal;
 }
 
+.article-list-excerpt {
+  width: 650px;
+  height: 120px;
+  margin: 18px 0 0;
+  overflow: hidden;
+  color: rgba(255, 255, 255, 0.88);
+  font-family: "Source Han Serif CN", "Stick", "Microsoft YaHei", sans-serif;
+  font-size: 18px;
+  line-height: 1.55;
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    #000 0%,
+    #000 58%,
+    rgba(0, 0, 0, 0.72) 76%,
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    to bottom,
+    #000 0%,
+    #000 58%,
+    rgba(0, 0, 0, 0.72) 76%,
+    transparent 100%
+  );
+}
+
 .article-divider {
   position: absolute;
   right: 118px;
@@ -1001,6 +1026,10 @@ body[data-language="zh"] .language-toggle [data-language-option="en"] {
     max-width: none;
     margin-top: 18px;
     font-size: 15px;
+  }
+
+  .article-list-excerpt {
+    display: none;
   }
 
   .article-divider {
