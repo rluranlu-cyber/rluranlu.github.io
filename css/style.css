@@ -577,7 +577,8 @@ body[data-language="zh"] .language-toggle [data-language-option="en"] {
 
 .archive-group {
   display: grid;
-  grid-template-columns: 92px 1fr;
+  grid-template-columns: 30ch minmax(0, 1fr);
+  column-gap: 32px;
   margin-bottom: 51px;
   font-size: 20px;
   line-height: 25px;
@@ -585,9 +586,12 @@ body[data-language="zh"] .language-toggle [data-language-option="en"] {
 
 .archive-tag {
   margin: 0;
+  overflow: hidden;
   color: var(--gold);
   font-size: 20px;
   font-weight: 400;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .archive-group:first-child .archive-tag {
@@ -606,7 +610,11 @@ body[data-language="zh"] .language-toggle [data-language-option="en"] {
 }
 
 .archive-entry time {
-  display: none;
+  display: block;
+  margin-top: 6px;
+  color: #d3603e;
+  font-size: 12px;
+  line-height: normal;
 }
 
 .archive-titles a {
@@ -1065,6 +1073,7 @@ body[data-language="zh"] .language-toggle [data-language-option="en"] {
     margin-bottom: 20px;
     padding: 0;
     border: 0;
+    overflow: visible;
     color: var(--orange);
     background: transparent;
     font-size: 20px;
@@ -1072,6 +1081,8 @@ body[data-language="zh"] .language-toggle [data-language-option="en"] {
     font-weight: 400;
     line-height: normal;
     text-align: left;
+    text-overflow: clip;
+    white-space: normal;
   }
 
   button.archive-tag {
@@ -1094,7 +1105,7 @@ body[data-language="zh"] .language-toggle [data-language-option="en"] {
   .archive-entry time {
     display: block;
     margin-top: 1px;
-    color: var(--orange);
+    color: #d3603e;
     font-size: 11px;
     line-height: normal;
   }
