@@ -75,4 +75,4 @@ tags:
 ---
 
 
-![图片](image-01.jpg)
+![图片](image-01.png)
