@@ -487,7 +487,7 @@ body[data-language="zh"] .language-toggle [data-language-option="en"] {
 
 .article-list-excerpt {
   width: 650px;
-  height: 120px;
+  height: 148px;
   margin: 18px 0 0;
   overflow: hidden;
   color: rgba(255, 255, 255, 0.88);
@@ -497,15 +497,17 @@ body[data-language="zh"] .language-toggle [data-language-option="en"] {
   -webkit-mask-image: linear-gradient(
     to bottom,
     #000 0%,
-    #000 58%,
-    rgba(0, 0, 0, 0.72) 76%,
+    #000 36%,
+    rgba(0, 0, 0, 0.76) 56%,
+    rgba(0, 0, 0, 0.38) 78%,
     transparent 100%
   );
   mask-image: linear-gradient(
     to bottom,
     #000 0%,
-    #000 58%,
-    rgba(0, 0, 0, 0.72) 76%,
+    #000 36%,
+    rgba(0, 0, 0, 0.76) 56%,
+    rgba(0, 0, 0, 0.38) 78%,
     transparent 100%
   );
 }

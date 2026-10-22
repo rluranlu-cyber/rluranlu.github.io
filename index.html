@@ -35,7 +35,7 @@ title: Ran Lu
                     {{ article.summary | default: article.excerpt | strip_html | strip_newlines | truncate: 180 }}
                   </p>
                   <p class="article-list-excerpt">
-                    {{ article.content | strip_html | normalize_whitespace | truncate: 420, "" }}
+                    {{ article.content | markdownify | strip_html | normalize_whitespace | truncate: 560, "" }}
                   </p>
                   <img class="article-divider" src="{{ '/image/article-divider.svg' | relative_url }}" width="650.333" height="5.33333" alt="" aria-hidden="true">
                 </article>
