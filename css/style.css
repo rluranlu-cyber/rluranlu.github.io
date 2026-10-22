@@ -755,6 +755,13 @@ body[data-language="zh"] .language-toggle [data-language-option="en"] {
   margin: 0;
 }
 
+@media (min-width: 768px) {
+  body {
+    background-attachment: fixed;
+    background-size: cover;
+  }
+}
+
 @media (max-width: 767px) {
   :root {
     --page-width: 100%;
