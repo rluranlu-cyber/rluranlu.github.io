@@ -1097,7 +1097,7 @@ body[data-language="zh"] .language-toggle [data-language-option="en"] {
   }
 
   .archive-titles {
-    gap: 8px;
+    gap: 16px;
   }
 
   .archive-entry {
