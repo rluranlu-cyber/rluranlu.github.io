@@ -162,6 +162,94 @@
   mobileLayoutQuery.addEventListener?.("change", () => applyLanguage());
   applyLanguage();
 
+  function setupPortraitPointerMotion() {
+    const portraitFrame = document.querySelector(".profile-card .profile-image-frame");
+    if (!portraitFrame) {
+      return;
+    }
+
+    const pointerMotionQuery = window.matchMedia(
+      "(min-width: 768px) and (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference)"
+    );
+    const inactivityDelay = 5000;
+    const maximumShift = 8;
+    const maximumRotation = 2;
+    let latestPointer = null;
+    let animationFrame = 0;
+    let inactivityTimer = 0;
+
+    portraitFrame.classList.add("is-pointer-reactive", "is-returning");
+
+    function setPortraitTransform(x, y, rotateX, rotateY, scale) {
+      portraitFrame.style.setProperty("--portrait-shift-x", `${x.toFixed(2)}px`);
+      portraitFrame.style.setProperty("--portrait-shift-y", `${y.toFixed(2)}px`);
+      portraitFrame.style.setProperty("--portrait-rotate-x", `${rotateX.toFixed(2)}deg`);
+      portraitFrame.style.setProperty("--portrait-rotate-y", `${rotateY.toFixed(2)}deg`);
+      portraitFrame.style.setProperty("--portrait-scale", scale.toFixed(3));
+    }
+
+    function resetPortrait() {
+      window.clearTimeout(inactivityTimer);
+      inactivityTimer = 0;
+      latestPointer = null;
+      if (animationFrame) {
+        window.cancelAnimationFrame(animationFrame);
+        animationFrame = 0;
+      }
+      portraitFrame.classList.add("is-returning");
+      setPortraitTransform(0, 0, 0, 0, 1);
+    }
+
+    function renderPointerMotion() {
+      animationFrame = 0;
+      if (!latestPointer || !pointerMotionQuery.matches) {
+        return;
+      }
+
+      const bounds = portraitFrame.getBoundingClientRect();
+      const centerX = bounds.left + bounds.width / 2;
+      const centerY = bounds.top + bounds.height / 2;
+      const horizontalRatio = Math.max(-1, Math.min(1,
+        (latestPointer.x - centerX) / Math.max(window.innerWidth / 2, 1)
+      ));
+      const verticalRatio = Math.max(-1, Math.min(1,
+        (latestPointer.y - centerY) / Math.max(window.innerHeight / 2, 1)
+      ));
+
+      portraitFrame.classList.remove("is-returning");
+      setPortraitTransform(
+        horizontalRatio * maximumShift,
+        verticalRatio * maximumShift,
+        -verticalRatio * maximumRotation,
+        horizontalRatio * maximumRotation,
+        1.1
+      );
+    }
+
+    window.addEventListener("pointermove", (event) => {
+      if (!pointerMotionQuery.matches || event.pointerType === "touch") {
+        return;
+      }
+
+      latestPointer = { x: event.clientX, y: event.clientY };
+      window.clearTimeout(inactivityTimer);
+      inactivityTimer = window.setTimeout(resetPortrait, inactivityDelay);
+      if (!animationFrame) {
+        animationFrame = window.requestAnimationFrame(renderPointerMotion);
+      }
+    }, { passive: true });
+
+    window.addEventListener("blur", resetPortrait);
+    document.addEventListener("visibilitychange", () => {
+      if (document.hidden) {
+        resetPortrait();
+      }
+    });
+    pointerMotionQuery.addEventListener?.("change", resetPortrait);
+  }
+
+  setupPortraitPointerMotion();
+
   function homeViewUrl(view, page = 1) {
     const url = new URL(homeUrl.href);
     if (view === "about") {
