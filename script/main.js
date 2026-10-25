@@ -171,7 +171,7 @@
     const pointerMotionQuery = window.matchMedia(
       "(min-width: 768px) and (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference)"
     );
-    const inactivityDelay = 5000;
+    const inactivityDelay = 1000;
     const maximumShift = 8;
     const maximumRotation = 5;
     let latestPointer = null;
@@ -249,6 +249,97 @@
   }
 
   setupPortraitPointerMotion();
+
+  function setupMobilePortraitTouchMotion() {
+    const portraitFrame = document.querySelector(".mobile-profile-image.profile-image-frame");
+    if (!portraitFrame) {
+      return;
+    }
+
+    const touchMotionQuery = window.matchMedia(
+      "(max-width: 767px) and (prefers-reduced-motion: no-preference)"
+    );
+    const inactivityDelay = 1000;
+    const maximumShift = 8;
+    const maximumRotation = 5;
+    let latestTouch = null;
+    let animationFrame = 0;
+    let inactivityTimer = 0;
+
+    portraitFrame.classList.add("is-touch-reactive", "is-returning");
+
+    function setPortraitTransform(x, y, rotateX, rotateY, scale) {
+      portraitFrame.style.setProperty("--portrait-shift-x", `${x.toFixed(2)}px`);
+      portraitFrame.style.setProperty("--portrait-shift-y", `${y.toFixed(2)}px`);
+      portraitFrame.style.setProperty("--portrait-rotate-x", `${rotateX.toFixed(2)}deg`);
+      portraitFrame.style.setProperty("--portrait-rotate-y", `${rotateY.toFixed(2)}deg`);
+      portraitFrame.style.setProperty("--portrait-scale", scale.toFixed(3));
+    }
+
+    function resetPortrait() {
+      window.clearTimeout(inactivityTimer);
+      inactivityTimer = 0;
+      latestTouch = null;
+      if (animationFrame) {
+        window.cancelAnimationFrame(animationFrame);
+        animationFrame = 0;
+      }
+      portraitFrame.classList.add("is-returning");
+      setPortraitTransform(0, 0, 0, 0, 1);
+    }
+
+    function renderTouchMotion() {
+      animationFrame = 0;
+      if (!latestTouch || !touchMotionQuery.matches) {
+        return;
+      }
+
+      const bounds = portraitFrame.getBoundingClientRect();
+      const centerX = bounds.left + bounds.width / 2;
+      const centerY = bounds.top + bounds.height / 2;
+      const horizontalRatio = Math.max(-1, Math.min(1,
+        (latestTouch.x - centerX) / Math.max(window.innerWidth / 2, 1)
+      ));
+      const verticalRatio = Math.max(-1, Math.min(1,
+        (latestTouch.y - centerY) / Math.max(window.innerHeight / 2, 1)
+      ));
+
+      portraitFrame.classList.remove("is-returning");
+      setPortraitTransform(
+        horizontalRatio * maximumShift,
+        verticalRatio * maximumShift,
+        -verticalRatio * maximumRotation,
+        horizontalRatio * maximumRotation,
+        1.1
+      );
+    }
+
+    function trackTouch(event) {
+      if (!touchMotionQuery.matches || !event.touches.length) {
+        return;
+      }
+
+      const touch = event.touches[0];
+      latestTouch = { x: touch.clientX, y: touch.clientY };
+      window.clearTimeout(inactivityTimer);
+      inactivityTimer = window.setTimeout(resetPortrait, inactivityDelay);
+      if (!animationFrame) {
+        animationFrame = window.requestAnimationFrame(renderTouchMotion);
+      }
+    }
+
+    document.addEventListener("touchstart", trackTouch, { passive: true });
+    document.addEventListener("touchmove", trackTouch, { passive: true });
+    window.addEventListener("blur", resetPortrait);
+    document.addEventListener("visibilitychange", () => {
+      if (document.hidden) {
+        resetPortrait();
+      }
+    });
+    touchMotionQuery.addEventListener?.("change", resetPortrait);
+  }
+
+  setupMobilePortraitTouchMotion();
 
   function homeViewUrl(view, page = 1) {
     const url = new URL(homeUrl.href);
