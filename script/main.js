@@ -8,8 +8,9 @@
   const mobileLayoutQuery = window.matchMedia("(max-width: 767px)");
   const translations = {
     en: {
-      greeting: "Hello, this is",
+      greeting: "Hello, welcome to\u00a0",
       siteName: "RAN LU",
+      welcomeSuffix: "'s paracosm",
       taglinePrefix: "^_+ ",
       taglinePrimary: "Amor Fati",
       taglineSuffix: " (:≡",
@@ -59,8 +60,9 @@
       toggleAria: "切换为中文"
     },
     zh: {
-      greeting: "大家好，这里是",
+      greeting: "大家好，欢迎来到",
       siteName: "陆然",
+      welcomeSuffix: "的异想世界",
       taglinePrefix: "^_+",
       taglinePrimary: "爱与正义与勇气",
       taglineSuffix: "(:≡",

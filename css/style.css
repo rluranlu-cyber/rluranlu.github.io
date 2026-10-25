@@ -898,6 +898,8 @@ body[data-language="zh"] .language-toggle [data-language-option="en"] {
 
   .site-header h1 {
     top: 90px;
+    width: calc(100% - 32px);
+    white-space: normal;
   }
 
   .site-header h1 b {
