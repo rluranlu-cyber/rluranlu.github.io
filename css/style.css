@@ -762,6 +762,56 @@ body[data-language="zh"] .language-toggle [data-language-option="en"] {
   }
 }
 
+@media (min-width: 768px) and (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  .profile-card .profile-image-frame.is-pointer-reactive {
+    overflow: hidden;
+    perspective: 500px;
+  }
+
+  .profile-card .profile-image-frame.is-pointer-reactive .profile-image-media {
+    transform: translate3d(
+        var(--portrait-shift-x, 0),
+        var(--portrait-shift-y, 0),
+        0
+      )
+      rotateX(var(--portrait-rotate-x, 0deg))
+      rotateY(var(--portrait-rotate-y, 0deg))
+      scale(var(--portrait-scale, 1));
+    transition: transform 110ms ease-out;
+    will-change: transform;
+  }
+
+  .profile-card .profile-image-frame.is-pointer-reactive.is-returning .profile-image-media {
+    transition-duration: 800ms;
+    transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+  }
+}
+
+@media (max-width: 767px) and (prefers-reduced-motion: no-preference) {
+  .mobile-profile-image.is-touch-reactive {
+    overflow: hidden;
+    perspective: 500px;
+  }
+
+  .mobile-profile-image.is-touch-reactive .profile-image-media {
+    transform: translate3d(
+        var(--portrait-shift-x, 0),
+        var(--portrait-shift-y, 0),
+        0
+      )
+      rotateX(var(--portrait-rotate-x, 0deg))
+      rotateY(var(--portrait-rotate-y, 0deg))
+      scale(var(--portrait-scale, 1));
+    transition: transform 110ms ease-out;
+    will-change: transform;
+  }
+
+  .mobile-profile-image.is-touch-reactive.is-returning .profile-image-media {
+    transition-duration: 800ms;
+    transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+  }
+}
+
 @media (max-width: 767px) {
   :root {
     --page-width: 100%;
