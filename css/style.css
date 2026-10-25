@@ -218,6 +218,30 @@ button:focus-visible {
     0 0 42px rgba(211, 96, 61, 0.22);
 }
 
+@keyframes profile-glow-breathe {
+  0%,
+  100% {
+    box-shadow:
+      0 0 8px rgba(211, 96, 61, 0.7),
+      0 0 22px rgba(211, 158, 61, 0.45),
+      0 0 42px rgba(211, 96, 61, 0.22);
+  }
+
+  50% {
+    box-shadow:
+      0 0 12px rgba(211, 96, 61, 0.9),
+      0 0 32px rgba(211, 158, 61, 0.66),
+      0 0 64px 8px rgba(211, 96, 61, 0.34);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .profile-image,
+  .mobile-profile-image {
+    animation: profile-glow-breathe 4s ease-in-out infinite;
+  }
+}
+
 .profile-image-frame {
   isolation: isolate;
 }
