@@ -173,7 +173,7 @@
     );
     const inactivityDelay = 5000;
     const maximumShift = 8;
-    const maximumRotation = 2;
+    const maximumRotation = 5;
     let latestPointer = null;
     let animationFrame = 0;
     let inactivityTimer = 0;
