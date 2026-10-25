@@ -795,6 +795,11 @@ body[data-language="zh"] .language-toggle [data-language-option="en"] {
     background-size: cover;
   }
 
+  .profile-card {
+    padding-top: 80px;
+    overflow: visible;
+  }
+
   .profile-card h3 {
     margin-top: 46px;
   }
@@ -802,6 +807,10 @@ body[data-language="zh"] .language-toggle [data-language-option="en"] {
   .profile-card .profile-values,
   .profile-card .profile-location {
     margin-top: 24px;
+  }
+
+  .profile-card .profile-loves {
+    margin-top: 28px;
   }
 }
 
