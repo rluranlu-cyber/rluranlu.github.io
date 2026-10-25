@@ -8,7 +8,7 @@
   const mobileLayoutQuery = window.matchMedia("(max-width: 767px)");
   const translations = {
     en: {
-      greeting: "Hello. Welcome to\u00a0",
+      greeting: "Hello! Welcome to\u00a0",
       siteName: "RAN LU",
       welcomeSuffix: "'s paracosm",
       taglinePrefix: "^_+ ",
