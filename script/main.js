@@ -8,9 +8,9 @@
   const mobileLayoutQuery = window.matchMedia("(max-width: 767px)");
   const translations = {
     en: {
-      greeting: "Hello, welcome to\u00a0",
+      greeting: "🍀Hello. Welcome to\u00a0",
       siteName: "RAN LU",
-      welcomeSuffix: "'s paracosm",
+      welcomeSuffix: "'s paracosm🔮",
       taglinePrefix: "^_+ ",
       taglinePrimary: "Amor Fati",
       taglineSuffix: " (:≡",
@@ -19,7 +19,7 @@
       blog: "Blog",
       archive: "Archive",
       profileName: "Ran Lu",
-      role: "3D Animation Director / AIGC Explorer",
+      role: "Storyteller / AIGC Explorer",
       valuesPrimary: "Humanist",
       valuesSecondary: "Idealist",
       locationPrimary: "📍Beijing",
@@ -60,9 +60,9 @@
       toggleAria: "切换为中文"
     },
     zh: {
-      greeting: "大家好，欢迎来到",
+      greeting: "🍀大家好！欢迎来到",
       siteName: "陆然",
-      welcomeSuffix: "的异想世界",
+      welcomeSuffix: "的异想世界🔮",
       taglinePrefix: "^_+",
       taglinePrimary: "爱与正义与勇气",
       taglineSuffix: "(:≡",
@@ -71,7 +71,7 @@
       blog: "博客",
       archive: "合辑",
       profileName: "陆然",
-      role: "3D 动画导演 / AIGC 探索者",
+      role: "叙事人 / AIGC 探索者",
       valuesPrimary: "人文主义者",
       valuesSecondary: "理想主义者",
       locationPrimary: "📍北京",
