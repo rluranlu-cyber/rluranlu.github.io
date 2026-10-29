@@ -1,9 +1,7 @@
 ---
 title: Basic Filmmaking Notes 基础电影学知识
-date: 2026-09-30
-summary: 基础电影学知识介绍兼网站测试文章
-tags:
-  - Notes 知识
+date: 2026-09-29
+summary: 基础电影学知识介绍兼网站测试
 ---
 ### Overview 概述
 
@@ -75,4 +73,4 @@ tags:
 ---
 
 
-![图片](image-01.png)
+![图片](image-01.jpg)

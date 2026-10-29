@@ -1,9 +1,7 @@
 ---
-title: Test Title 测试文章标题
+title: Basic Filmmaking Notes 基础电影学知识
 date: 2026-09-29
-summary: 网站测试用文章
-tags:
-  - Notes 知识
+summary: 基础电影学知识介绍兼网站测试
 ---
 ### Overview 概述
 
@@ -75,4 +73,4 @@ tags:
 ---
 
 
-![图片](Image2_00001_.png)
+![图片](image-01.jpg)
