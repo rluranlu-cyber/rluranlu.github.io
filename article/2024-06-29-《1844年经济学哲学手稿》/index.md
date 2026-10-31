@@ -2,7 +2,8 @@
 title: 《1844年经济学哲学手稿》
 date: 2024-06-29
 summary: 旧文搬运
-tags: Reading Notes 读书笔记
+tags:
+  - ReadingNotes读书笔记
 ---
 
 比较适合工作后的人阅读，在实践中拥有了一套处世方法论之后再读这本书感触会更实在。  
