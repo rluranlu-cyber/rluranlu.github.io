@@ -3,7 +3,7 @@ title: Basic Filmmaking Notes 基础电影学知识（持续更新……）
 date: 2026-09-30
 summary: 基础电影学知识
 tags:
-  - Notes知识笔记
+  - Notes 知识笔记
 ---
 # Overview 概述
 
