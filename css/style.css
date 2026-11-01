@@ -836,7 +836,7 @@ body[data-language="zh"] .language-toggle [data-language-option="en"] {
 
   .site-header {
     min-height: calc(270px + var(--desktop-header-top-height));
-    padding-top: calc(var(--desktop-header-top-height) - 30px);
+    padding-top: max(220px, calc(50vh - 89px));
   }
 
   .site-header h1,
