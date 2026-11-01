@@ -790,6 +790,12 @@ body[data-language="zh"] .language-toggle [data-language-option="en"] {
 }
 
 @media (min-width: 768px) {
+  :root {
+    --desktop-gate-width: max(100vw, var(--page-width));
+    --desktop-header-top-height: max(35.8079vw, 466px);
+    --desktop-header-bottom-height: max(47.5255vw, 618px);
+  }
+
   html {
     background-color: var(--canvas);
     background-image:
@@ -813,9 +819,9 @@ body[data-language="zh"] .language-toggle [data-language-option="en"] {
     z-index: 0;
     bottom: 0;
     left: 50%;
-    width: var(--page-width);
-    height: 618px;
-    background: url("../image/Header_01_Bottom.png") center bottom / 100% 100% no-repeat;
+    width: var(--desktop-gate-width);
+    height: var(--desktop-header-bottom-height);
+    background: url("../image/Header_01_Bottom.png") center bottom / 100% auto no-repeat;
     content: "";
     pointer-events: none;
     transform: translateX(-50%);
@@ -829,20 +835,21 @@ body[data-language="zh"] .language-toggle [data-language-option="en"] {
   }
 
   .site-header {
-    min-height: 991px;
-    padding-top: 691px;
+    min-height: calc(525px + var(--desktop-header-top-height));
+    padding-top: calc(225px + var(--desktop-header-top-height));
   }
 
   .site-header::before {
     position: absolute;
     z-index: -1;
     top: 0;
-    left: 0;
-    width: 100%;
-    height: 466px;
-    background: url("../image/Header_01_Top.png") center top / 100% 100% no-repeat;
+    left: 50%;
+    width: var(--desktop-gate-width);
+    height: var(--desktop-header-top-height);
+    background: url("../image/Header_01_Top.png") center top / 100% auto no-repeat;
     content: "";
     pointer-events: none;
+    transform: translateX(-50%);
   }
 
   .profile-card {
