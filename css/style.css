@@ -835,8 +835,8 @@ body[data-language="zh"] .language-toggle [data-language-option="en"] {
   }
 
   .site-header {
-    min-height: calc(525px + var(--desktop-header-top-height));
-    padding-top: calc(225px + var(--desktop-header-top-height));
+    min-height: calc(340px + var(--desktop-header-top-height));
+    padding-top: calc(40px + var(--desktop-header-top-height));
   }
 
   .site-header::before {
